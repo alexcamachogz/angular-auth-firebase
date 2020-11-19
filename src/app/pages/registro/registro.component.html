@@ -1,0 +1,57 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 p-t-50 p-b-90">
+      <form class="login100-form validate-form flex-sb flex-w" (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+        <span class="login100-form-title p-b-51">
+          Crear nueva cuenta
+        </span>
+
+        <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">El correo es
+          obligatorio</span>
+        <div class="wrap-input100 m-b-16">
+          <input class="input100" type="email" name="email" placeholder="Email" [(ngModel)]="user.email" required email>
+          <span class="focus-input100"></span>
+        </div>
+
+        <span *ngIf="f.submitted && f.controls.name.errors" class="text-danger animated fadeIn">El nombre es
+          obligatorio</span>
+        <div class="wrap-input100 m-b-16">
+          <input class="input100" type="text" name="name" placeholder="Nombre y apellidos" [(ngModel)]="user.name"
+            minlength="2" required>
+          <span class="focus-input100"></span>
+        </div>
+
+        <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">Al menos 6
+          caracteres</span>
+        <div class="wrap-input100 m-b-16">
+          <input class="input100" type="password" name="password" placeholder="Password" [(ngModel)]="user.password"
+            minlength="6" required>
+          <span class="focus-input100"></span>
+        </div>
+
+        <div class="flex-sb-m w-full p-t-3 p-b-24">
+          <div class="contact100-form-checkbox">
+            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+            <label class="label-checkbox100" for="ckb1">
+              Recordar mi usuario
+            </label>
+          </div>
+
+          <div>
+            <a routerLink="/login" class="txt1">
+              ¿Ya tienes cuenta? / Ingresar
+            </a>
+          </div>
+        </div>
+
+        <div class="container-login100-form-btn m-t-17">
+          <button class="login100-form-btn" type="submit">
+            Crear cuenta
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
