@@ -57,6 +57,9 @@ export class AuthService {
   private saveToke(idToken: string) {
     this.userToken = idToken
     localStorage.setItem('token', idToken)
+    const today = new Date()
+    today.setSeconds(3600)
+    localStorage.setItem('expire', today.getTime().toString())
   }
 
   readToken() {
@@ -70,6 +73,17 @@ export class AuthService {
   }
 
   isAuth(): boolean {
-    return this.userToken.length > 2
+    if (this.userToken.length < 2) {
+      return false
+    }
+
+    const expire = Number(localStorage.getItem('expire'))
+    const expireToday = new Date()
+    expireToday.setTime(expire)
+    if (expireToday > new Date()) {
+      return true
+    } else {
+      return false
+    }
   }
 }
