@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms'
 import Swal from 'sweetalert2'
 import { UserModel } from '../../models/user.model'
 import { AuthService } from '../../services/auth.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-registro',
@@ -11,11 +12,13 @@ import { AuthService } from '../../services/auth.service'
 })
 export class RegistroComponent implements OnInit {
   user: UserModel
+  saveLogin: boolean
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.user = new UserModel()
+    this.saveLogin = false
   }
 
   onSubmit(form: NgForm) {
@@ -33,6 +36,10 @@ export class RegistroComponent implements OnInit {
     this.auth.newUser(this.user).subscribe(
       () => {
         Swal.close()
+        if (this.saveLogin) {
+          localStorage.setItem('email', this.user.email)
+        }
+        this.router.navigateByUrl('/home')
       },
       (err) => {
         Swal.fire({
