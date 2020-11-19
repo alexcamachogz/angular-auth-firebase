@@ -16,7 +16,9 @@ export class AuthService {
     this.readToken()
   }
 
-  // logout() {}
+  logout() {
+    localStorage.removeItem('token')
+  }
 
   login(user: UserModel) {
     const authData = {
@@ -65,5 +67,9 @@ export class AuthService {
     }
 
     return this.userToken
+  }
+
+  isAuth(): boolean {
+    return this.userToken.length > 2
   }
 }
